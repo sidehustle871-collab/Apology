@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Thousand Apologies — From the Bottom of My Heart</title>
+  <meta name="description" content="An interactive, heartfelt sanctuary dedicated to expressing genuine apologies, sincere promises, and deep remorse.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-midnight">
+  <!-- Interactive Ambient Canvas -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar" id="main-nav">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-icon">🕊️</span>
+        <div class="brand-text">
+          <span class="brand-title">A Thousand Apologies</span>
+          <span class="brand-tagline">Written with sincerity & care</span>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <!-- Ambient Sound Toggle -->
+        <button id="sound-toggle-btn" class="ctrl-btn" title="Toggle Calming Ambient Chimes" aria-label="Toggle Calming Sound">
+          <span class="btn-icon" id="sound-icon">🔇</span>
+          <span class="btn-label" id="sound-label">Sound Off</span>
+        </button>
+
+        <!-- Theme Selector -->
+        <div class="theme-picker" id="theme-picker">
+          <button class="ctrl-btn theme-btn" id="theme-btn" title="Change Mood Theme" aria-label="Change Visual Theme">
+            <span class="btn-icon">🎨</span>
+            <span class="btn-label" id="active-theme-label">Midnight</span>
+          </button>
+          <div class="theme-dropdown" id="theme-dropdown">
+            <button class="theme-opt active" data-theme="theme-midnight">🌌 Midnight Regret</button>
+            <button class="theme-opt" data-theme="theme-sunset">🌅 Warm Sunset</button>
+            <button class="theme-opt" data-theme="theme-rose">🌸 Soft Rose</button>
+            <button class="theme-opt" data-theme="theme-ocean">🌊 Deep Ocean</button>
+          </div>
+        </div>
+
+        <!-- Quick Forgive Button -->
+        <button id="nav-forgive-btn" class="glow-pill-btn">
+          <span>Accept Apology ❤️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content">
+        <!-- Recipient Personalization Tag -->
+        <div class="recipient-tag-wrapper">
+          <span class="heart-pulse">💌</span>
+          <span class="recipient-prefix">Dedicated sincerely to</span>
+          <button id="edit-recipient-btn" class="recipient-name-btn" title="Click to personalize recipient name">
+            <span id="recipient-name-display">Someone Who Deserves Better</span>
+            <span class="edit-badge">✏️ Edit</span>
+          </button>
+        </div>
+
+        <h1 class="hero-title">
+          I Am Truly, Profoundly <span class="shimmer-text">Sorry.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Words can never undo a mistake, but they can be the start of rebuilding trust. 
+          Here are my honest feelings, heartfelt apologies, and steadfast promises to do better.
+        </p>
+
+        <!-- Dynamic Apology Stat Badges -->
+        <div class="stat-pills-row">
+          <div class="stat-pill">
+            <span class="stat-number" id="total-apologies-count">60+</span>
+            <span class="stat-desc">Apologies Written</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-number">100%</span>
+            <span class="stat-desc">Zero Excuses</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-number">∞</span>
+            <span class="stat-desc">Endless Regret & Care</span>
+          </div>
+        </div>
+
+        <!-- Interactive Forgiveness Hero Trigger -->
+        <div class="hero-cta-group">
+          <button id="hero-forgive-btn" class="cta-primary-btn">
+            <span class="btn-sparkle">✨</span>
+            <span>I Forgive You</span>
+          </button>
+          <button id="hero-playful-btn" class="cta-secondary-btn">
+            <span>Still a Little Mad...</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apology Oracle / Instant Apology Generator (Wheel/Card Draw) -->
+    <section class="oracle-section" id="oracle">
+      <div class="section-container">
+        <div class="section-badge">✨ Instant Sincerity Generator</div>
+        <h2 class="section-title">Draw an Apology from My Heart</h2>
+        <p class="section-sub">Whenever you need to be reminded of how genuinely sorry I am, tap below.</p>
+
+        <div class="oracle-card-wrapper">
+          <div class="oracle-card" id="oracle-card">
+            <div class="oracle-card-decor"></div>
+            <div class="oracle-quote-icon">“</div>
+            <p class="oracle-text" id="oracle-text">
+              "I am sorry for letting my mood get the better of me. You deserved my warmth, not my distance."
+            </p>
+            <div class="oracle-category" id="oracle-category">Sincere & Deep</div>
+            <div class="oracle-index" id="oracle-index">Apology #1 of 60</div>
+          </div>
+
+          <div class="oracle-actions">
+            <button id="draw-apology-btn" class="oracle-btn">
+              <span class="btn-icon">🎲</span>
+              <span>Draw Another Apology</span>
+            </button>
+            <button id="copy-oracle-btn" class="oracle-btn-sub" title="Copy this apology text">
+              <span>📋 Copy Message</span>
+            </button>
+            <button id="heart-oracle-btn" class="oracle-btn-sub" title="Save to favorites">
+              <span id="oracle-heart-icon">🤍</span>
+              <span id="oracle-heart-text">Favorite</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Forgiveness Progress Journey -->
+    <section class="journey-section" id="journey">
+      <div class="section-container">
+        <div class="section-badge">🕊️ The Healing Path</div>
+        <h2 class="section-title">The Forgiveness Meter</h2>
+        <p class="section-sub">
+          Forgiveness cannot be rushed. Drag the slider to reflect where you are right now, and see what I have to say.
+        </p>
+
+        <div class="meter-box">
+          <div class="meter-header">
+            <span class="meter-status-title">Current Feeling:</span>
+            <span class="meter-status-val" id="meter-percent-val">50%</span>
+          </div>
+
+          <input type="range" id="forgiveness-slider" min="0" max="100" value="50" step="1" class="custom-slider" aria-label="Forgiveness level slider">
+
+          <div class="slider-marks">
+            <span>0% (Fuming)</span>
+            <span>25% (Slightly Annoyed)</span>
+            <span>50% (Processing)</span>
+            <span>75% (Softening)</span>
+            <span>100% (Forgiven!)</span>
+          </div>
+
+          <!-- Dynamic Reaction Card -->
+          <div class="meter-reaction-card" id="meter-reaction-card">
+            <div class="reaction-emoji" id="reaction-emoji">💭</div>
+            <div class="reaction-content">
+              <h3 class="reaction-heading" id="reaction-heading">I understand you need time.</h3>
+              <p class="reaction-desc" id="reaction-desc">
+                Take all the space and time you need. I'm here, I'm patient, and I'm listening whenever you're ready.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apology Wall Section (The Main Collection of 60+ Messages) -->
+    <section class="wall-section" id="wall">
+      <div class="section-container">
+        <div class="wall-header-group">
+          <div>
+            <div class="section-badge">📖 The Infinite Wall</div>
+            <h2 class="section-title">Every Reason I Am Sorry</h2>
+            <p class="section-sub">A curated collection of honest regrets, sweet concessions, and promises.</p>
+          </div>
+
+          <!-- Search and Filter Bar -->
+          <div class="wall-filter-bar">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="apology-search-input" placeholder="Search apologies (e.g. 'words', 'listen', 'stubborn')..." aria-label="Search apologies">
+              <button id="clear-search-btn" class="clear-btn" style="display:none;" title="Clear search">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="category-tabs" id="category-tabs" role="tablist">
+          <button class="cat-tab active" data-category="all" role="tab" aria-selected="true">
+            All Apologies (<span id="cat-count-all">0</span>)
+          </button>
+          <button class="cat-tab" data-category="sincere" role="tab" aria-selected="false">
+            💔 Deep & Sincere (<span id="cat-count-sincere">0</span>)
+          </button>
+          <button class="cat-tab" data-category="cute" role="tab" aria-selected="false">
+            🥺 Tender & Cute (<span id="cat-count-cute">0</span>)
+          </button>
+          <button class="cat-tab" data-category="promises" role="tab" aria-selected="false">
+            🤞 Promises & Actions (<span id="cat-count-promises">0</span>)
+          </button>
+          <button class="cat-tab" data-category="olive" role="tab" aria-selected="false">
+            🕊️ Olive Branches (<span id="cat-count-olive">0</span>)
+          </button>
+          <button class="cat-tab" data-category="saved" role="tab" aria-selected="false">
+            ⭐ Saved (<span id="cat-count-saved">0</span>)
+          </button>
+        </div>
+
+        <!-- Grid of Apologies -->
+        <div class="apology-grid" id="apology-grid">
+          <!-- Dynamically populated via app.js -->
+        </div>
+
+        <!-- Empty State message -->
+        <div id="grid-empty-state" class="empty-state" style="display:none;">
+          <div class="empty-icon">🌱</div>
+          <h3>No apologies found for this filter</h3>
+          <p>Try clearing your search or checking another category.</p>
+          <button id="reset-filter-btn" class="oracle-btn-sub">Reset Filters</button>
+        </div>
+
+        <!-- Load More / Shuffle Button -->
+        <div class="grid-footer-actions">
+          <button id="shuffle-grid-btn" class="ctrl-btn-large">
+            <span>🔀 Shuffle Apologies</span>
+          </button>
+          <button id="add-custom-apology-btn" class="ctrl-btn-large highlight">
+            <span>✍️ Add Your Own Apology</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Sincere Open Letter / Scroll -->
+    <section class="letter-section" id="letter">
+      <div class="section-container">
+        <div class="section-badge">📜 Handwritten From The Soul</div>
+        <h2 class="section-title">An Open Letter to You</h2>
+        <p class="section-sub">If you only read one thing today, please let it be this.</p>
+
+        <div class="parchment-letter">
+          <div class="letter-seal" id="letter-seal">
+            <span class="seal-icon">❤️</span>
+            <span class="seal-label">A Letter of Sincerity</span>
+          </div>
+
+          <div class="letter-content" id="letter-body">
+            <p class="letter-greeting">Dearest <span class="recipient-inline-name">Special One</span>,</p>
+            
+            <p>
+              I am writing this because saying "I'm sorry" in passing never feels like enough when I know my actions, 
+              words, or silence caused you hurt or disappointment. You mean far too much to me for me to ever shrug off 
+              your feelings.
+            </p>
+
+            <p>
+              I want you to know that I take full accountability. I'm not here to make excuses or justify what I did. 
+              What matters is that you felt let down, and being the source of that pain is something I deeply regret. 
+              You deserve gentleness, active understanding, and consistent respect.
+            </p>
+
+            <p>
+              I promise not just to say sorry, but to show it in how I treat you, how I listen when you speak, and how 
+              I prioritize your peace of mind. Thank you for your patience with me, even when I stumble.
+            </p>
+
+            <div class="letter-signature">
+              <span class="signature-tagline">With all my remorse and genuine care,</span>
+              <span class="signature-name">— Yours Always</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Commitments & Promises Section -->
+    <section class="commitments-section" id="promises">
+      <div class="section-container">
+        <div class="section-badge">🤝 Tangible Change</div>
+        <h2 class="section-title">My 10 Commitments to You</h2>
+        <p class="section-sub">Apologies without changed behavior are just empty words. Here is what I am committing to:</p>
+
+        <div class="commitments-grid" id="commitments-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Forgive Celebration Modal / Overlay -->
+    <div id="forgive-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        <div class="modal-confetti-badge">🎉</div>
+        <h2 id="modal-title" class="modal-title">Thank You From the Bottom of My Heart!</h2>
+        <p class="modal-text">
+          Your kindness and forgiveness mean everything. I will hold onto this second chance with immense gratitude, 
+          care, and affection.
+        </p>
+        <div class="modal-gift-box">
+          <div class="gift-icon">🎁</div>
+          <div class="gift-info">
+            <strong>Unlimited Hugs & Peace Offering Redeemed</strong>
+            <span>Valid forever, anytime you need warmth or a listening ear.</span>
+          </div>
+        </div>
+        <button id="close-forgive-modal" class="cta-primary-btn" style="width:100%; justify-content:center;">
+          <span>Cherish This Moment ❤️</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Add Custom Apology Modal -->
+    <div id="custom-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="custom-modal-title">
+      <div class="modal-card custom-modal-card">
+        <div class="modal-top-bar">
+          <h2 id="custom-modal-title" class="modal-title">Write a Custom Apology</h2>
+          <button id="close-custom-modal" class="close-x-btn" aria-label="Close modal">✕</button>
+        </div>
+        <p class="modal-text">Add your own personalized apology or message to this wall.</p>
+
+        <form id="custom-apology-form" class="custom-form">
+          <div class="form-group">
+            <label for="custom-text">Apology Message:</label>
+            <textarea id="custom-text" required rows="3" placeholder="I am sorry for..." maxlength="300"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="custom-category">Category:</label>
+            <select id="custom-category">
+              <option value="sincere">💔 Deep & Sincere</option>
+              <option value="cute">🥺 Tender & Cute</option>
+              <option value="promises">🤞 Promises & Actions</option>
+              <option value="olive">🕊️ Olive Branches</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="custom-author">Signed by (Optional):</label>
+            <input type="text" id="custom-author" placeholder="Me" maxlength="30">
+          </div>
+
+          <button type="submit" class="cta-primary-btn" style="width:100%; justify-content:center;">
+            <span>Add to Apology Wall 💌</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Recipient Name Modal -->
+    <div id="recipient-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="recipient-modal-title">
+      <div class="modal-card">
+        <div class="modal-top-bar">
+          <h2 id="recipient-modal-title" class="modal-title">Personalize This Website</h2>
+          <button id="close-recipient-modal" class="close-x-btn" aria-label="Close modal">✕</button>
+        </div>
+        <p class="modal-text">Enter the name of the person you want to dedicate these apologies to:</p>
+        <form id="recipient-form" class="custom-form">
+          <div class="form-group">
+            <label for="recipient-input-field">Their Name or Nickname:</label>
+            <input type="text" id="recipient-input-field" placeholder="e.g. Sweetheart, Alex, Bestie..." maxlength="40" required>
+          </div>
+          <button type="submit" class="cta-primary-btn" style="width:100%; justify-content:center;">
+            <span>Save & Personalize ✨</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-heart">🕊️</span>
+        <p class="footer-slogan">Made with genuine humility, remorse, and love.</p>
+      </div>
+      <p class="footer-copy">Because saying sorry is only the beginning — everyday care is the promise.</p>
+      <div class="footer-links">
+        <a href="#hero">Top</a>
+        <a href="#oracle">Draw Apology</a>
+        <a href="#journey">Forgiveness Meter</a>
+        <a href="#wall">Apology Wall</a>
+        <a href="#letter">Open Letter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
