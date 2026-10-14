@@ -8,6 +8,36 @@
 // 1. DATASET: 60+ CURATED HEARTFELT APOLOGIES
 // ==========================================
 const BASE_APOLOGIES = [
+  // Special Personalized Apologies for Faveeza
+  {
+    id: 101,
+    lead: "Faveeza, your smile is my favorite sight in the world.",
+    text: "Looking back at our moments together by the river reminds me how pure and beautiful your happiness is. I'm so deeply sorry for any moment I made you feel anything less than deeply loved and respected.",
+    category: "sincere",
+    author: "Yours always, with remorse"
+  },
+  {
+    id: 102,
+    lead: "Faveeza, I am sorry for being stubborn.",
+    text: "You are the most precious person to me. Winning an argument or clinging to silly pride is utterly meaningless compared to protecting your peace of mind.",
+    category: "sincere",
+    author: "From the bottom of my heart"
+  },
+  {
+    id: 103,
+    lead: "To my dearest Faveeza:",
+    text: "I promise to hold your hand through every river we cross, to listen with all my heart, and to never let careless moments dim your beautiful light again.",
+    category: "promises",
+    author: "My forever pledge to you"
+  },
+  {
+    id: 104,
+    lead: "Faveeza, peace treaty offering: infinite warm hugs & treats.",
+    text: "Valid anywhere, anytime — especially whenever you need comfort, hot tea, or a reassuring embrace.",
+    category: "olive",
+    author: "At your service, always"
+  },
+
   // Sincere & Deep
   {
     id: 1,
@@ -458,7 +488,7 @@ let savedApologyIds = new Set();
 let currentFilter = 'all';
 let searchQuery = '';
 let currentOracleIndex = 0;
-let recipientName = "Someone Truly Invaluable";
+let recipientName = "Faveeza";
 let activeTheme = 'theme-midnight';
 let isSoundOn = false;
 
@@ -476,8 +506,13 @@ function loadStoredState() {
       apologiesList = [...BASE_APOLOGIES];
     }
     const storedName = localStorage.getItem('forgive_recipient_name');
-    if (storedName) {
+    if (storedName && storedName !== "Someone Who Deserves Better" && storedName !== "Someone Truly Invaluable") {
       recipientName = storedName;
+    } else {
+      recipientName = "Faveeza";
+      try {
+        localStorage.setItem('forgive_recipient_name', "Faveeza");
+      } catch (e) {}
     }
     const storedTheme = localStorage.getItem('forgive_theme');
     if (storedTheme) {
@@ -1005,7 +1040,7 @@ function renderCommitments() {
 // 11. RECIPIENT NAME PERSONALIZATION
 // ==========================================
 function applyRecipientName(name) {
-  recipientName = name.trim() || "Someone Truly Invaluable";
+  recipientName = name.trim() || "Faveeza";
   try {
     localStorage.setItem('forgive_recipient_name', recipientName);
   } catch (e) {}
@@ -1049,12 +1084,12 @@ function setTheme(themeClass) {
 // 13. PLAYFUL "STILL MAD" DODGE / SWEET NOTES
 // ==========================================
 const PLAYFUL_RESPONSES = [
-  "Are you sure? What if I bake cookies? 🍪",
-  "Fair enough. Would a 10-minute foot massage help? 💆",
-  "I understand! Let me grab your favorite drink first 🧋",
-  "What if I agree you were right all along? (Which you were!) 😇",
-  "Sending an emergency tactical puppy right now 🐶",
-  "I'll sit quietly in the corner until you smile! 🥺"
+  "Faveeza, what if I bake your absolute favorite cookies? 🍪",
+  "Fair enough, Faveeza! Would a 10-minute foot massage help? 💆",
+  "I understand! Let me get you your favorite treat first, Faveeza 🧋",
+  "What if I agree you were right all along, Faveeza? (Which you always are!) 😇",
+  "Sending an emergency tactical puppy directly to Faveeza right now 🐶",
+  "I'll sit quietly in the corner until you smile, Faveeza! 🥺"
 ];
 let playfulClickCount = 0;
 
